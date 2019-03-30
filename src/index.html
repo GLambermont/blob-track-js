@@ -4,9 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cluster cunt demo</title>
+  <title>Blob track test</title>
 </head>
 <body>
-  
+  <canvas class="js-tracking-canvas"></canvas>
+
+  <script src="../.tmp/blob-track.iife.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', e => {
+      const tracker = new blobTrack.Tracker();
+
+      blobTrack.utils.createWebcamStream().then(video => {
+        tracker.video = video;
+        tracker.trackHandler = () => {};
+        tracker.track();
+      });
+    });
+  </script>
 </body>
 </html>

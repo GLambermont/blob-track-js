@@ -1,5 +1,5 @@
 {
-  "name": "cluster-cunt",
+  "name": "blob-track",
   "version": "1.0.0",
   "description": "",
   "main": "dist/js/blob-track.js",
@@ -19,5 +19,6 @@
     "rollup-plugin-eslint": "^5.1.0",
     "rollup-plugin-gzip": "^2.2.0",
     "rollup-plugin-terser": "^4.0.4"
-  }
+  },
+  "dependencies": {}
 }

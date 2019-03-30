@@ -1,3 +1,4 @@
+import settings from './rollup.settings.js';
 import { eslint } from 'rollup-plugin-eslint';
 import babel from 'rollup-plugin-babel';
 import { terser } from "rollup-plugin-terser";
@@ -6,32 +7,58 @@ import gzip from 'rollup-plugin-gzip'
 // Check if build mode. Defaults to production if none is given.
 const IS_PROD = process.env.MODE != 'development';
 
-const outputPaths = {
-  dev: '.tmp',
-  prod: 'lib'
-}
+// Compose an output out of given settings
+const configOutput = ({ 
+  dir, 
+  name,
+  fileNameBase, 
+  formats, 
+  prefix = '', 
+  suffix = '' 
+}) => formats.map(format => {
+  return {
+    file: `${dir}/${prefix}${fileNameBase}.${format}${suffix}.js`,
+    name,
+    format,
+    sourcemap: true
+  };
+});
 
-const formats = {
-  dev: ['iife'],
-  prod: ['amd', 'cjs', 'es', 'iife', 'umd']
+// Config for development builds
+const devConfig = () => {
+  return {
+    input: settings.input,
+    output: configOutput({
+      dir: settings.outputPaths.dev,
+      name: settings.name,
+      fileNameBase: settings.fileNameBase,
+      formats: settings.formats.dev,
+    }),
+    plugins: [
+      eslint(),
+      babel()
+    ]
+  };
 };
 
-const buildOutputPath = IS_PROD ? outputPaths.prod : outputPaths.dev;
-const buildFormats = IS_PROD ? formats.prod : formats.dev;
-
-export default {
-  input: './src/js/blob-track.js',
-  output: buildFormats.map(format => {
-    return {
-      file: `./${buildOutputPath}/blob-track.${format}.min.js`,
-      format,
-      sourcemap: true
-    };
-  }),
-  plugins: [
-    eslint(),
-    babel(),
-    terser(),
-    gzip({ minSize: 8192 })
-  ]
+// Config for production builds
+const prodConfig = () => {
+  return {
+    input: settings.input,
+    output: configOutput({
+      dir: settings.outputPaths.prod,
+      name: settings.name,
+      fileNameBase: settings.fileNameBase,
+      formats: settings.formats.prod,
+      suffix: '.min'
+    }),
+    plugins: [
+      eslint(),
+      babel(),
+      terser(),
+      gzip({ minSize: 8192 })
+    ]
+  };
 };
+
+export default IS_PROD ? prodConfig : devConfig;
