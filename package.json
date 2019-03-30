@@ -1,0 +1,23 @@
+{
+  "name": "cluster-cunt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/js/blob-track.js",
+  "scripts": {
+    "watch": "rollup -c -w --environment MODE:development",
+    "build": "rimraf lib | rollup -c --environment MODE:production"
+  },
+  "keywords": [],
+  "author": "Gilbert Lambermont",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.7.4",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-eslint": "^5.1.0",
+    "rollup-plugin-gzip": "^2.2.0",
+    "rollup-plugin-terser": "^4.0.4"
+  }
+}
