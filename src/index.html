@@ -12,12 +12,8 @@
   <script src="../.tmp/blob-track.iife.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', e => {
-      const tracker = new blobTrack.Tracker();
-
       blobTrack.utils.createWebcamStream().then(video => {
-        tracker.video = video;
-        tracker.trackHandler = () => {};
-        tracker.track();
+        blobTrack.trackColor(video)(() => {})
       });
     });
   </script>

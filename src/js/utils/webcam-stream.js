@@ -12,7 +12,7 @@ const createWebcamStream = (videoEl = document.createElement('video')) => {
 
       return videoEl;
     })
-    .catch(err => {
+    .catch(() => {
       throw new Error('Could not start video stream.');
     });
 };

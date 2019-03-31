@@ -9,6 +9,7 @@
   },
   "rules": {
     "no-console": "off",
+    "no-extra-semi": "off",
     "strict": ["error", "global"],
     "curly": "warn",
     "indent": ["error", 2]
