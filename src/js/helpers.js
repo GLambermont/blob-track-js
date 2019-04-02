@@ -1,17 +1,3 @@
-const imageDataToPixelData = data => {
-  const pixelData = [];
-
-  for(let i = 0; i < data.length; i += 4) {
-    pixelData[i / 4] = [
-      data[i],
-      data[i + 1],
-      data[i + 2],
-    ]
-  }
-
-  return pixelData;
-};
-
 /**
  * Get the squared euclidean distance between two points.
  * @param {Object} v1

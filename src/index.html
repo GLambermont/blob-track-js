@@ -21,7 +21,7 @@
           canvas.height = video.videoHeight;
 
           motionTracker.track(video, data => {
-            // console.log(Math.sqrt(data.distance));
+            // console.log(data);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(video, 0, 0);
             ctx.fillStyle = 'red';
