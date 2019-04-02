@@ -3,18 +3,20 @@
  * @param {HTMLElement} [videoEl] Video element to use for the stream.
  * @returns Promise containing a video element for the stream.
  */
-const createWebcamStream = (videoEl = document.createElement('video')) => { 
-  return navigator.mediaDevices.getUserMedia({ video: true })
+const createWebcamStream = (videoEl = document.createElement('video')) => new Promise((resolve, reject) => {
+  navigator.mediaDevices.getUserMedia({ video: true })
     .then(stream => {
+      // Set the video element attributes
       videoEl.setAttribute('autoplay', true);
       videoEl.srcObject = stream;
-      videoEl.onloadedmetadata = () => videoEl.play;
 
-      return videoEl;
+      // Wait for video to load before resolving and starting the video
+      videoEl.onloadedmetadata = () => {
+        videoEl.play;
+        resolve(videoEl);
+      };
     })
-    .catch(() => {
-      throw new Error('Could not start video stream.');
-    });
-};
+    .catch(() => reject(new Error('Could not start video stream.')));
+});
 
 export { createWebcamStream };

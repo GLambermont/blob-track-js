@@ -1,7 +1,7 @@
 export default {
-  name: 'blobTrack',
-  fileNameBase: 'blob-track',
-  input: './src/js/blob-track.js',
+  name: 'motionTracker',
+  fileNameBase: 'motion-tracker',
+  input: './src/js/motion-tracker.js',
   outputPaths: {
     dev: '.tmp',
     prod: 'lib'

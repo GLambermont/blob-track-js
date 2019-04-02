@@ -1,13 +1,12 @@
-const imageDataToPixelData = data => {  
+const imageDataToPixelData = data => {
   const pixelData = [];
 
-  for(let i = 0; i < data.length; i += 4) { 
-    pixelData[i / 4] = {
-      r: data[i],
-      g: data[i + 1],
-      b: data[i + 2],
-      a: data[i + 3]
-    }
+  for(let i = 0; i < data.length; i += 4) {
+    pixelData[i / 4] = [
+      data[i],
+      data[i + 1],
+      data[i + 2],
+    ]
   }
 
   return pixelData;
@@ -28,6 +27,7 @@ const distanceSquared = (v1, v2) => {
   return (v1[0] - v2[0]) * (v1[0] - v2[0]) + (v1[1] - v2[1]) * (v1[1] - v2[1]) + (v1[2] - v2[2]) * (v1[2] - v2[2]);
 };
 
+// console.log(imageDataToPixelData([12, 5641, 564, 546, 546, 22,55, 32]))
 export {
   imageDataToPixelData,
   distanceSquared

@@ -1,8 +1,8 @@
 {
-  "name": "blob-track",
+  "name": "motion-tracker-js",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/js/blob-track.js",
+  "main": "dist/js/motion-tracker.js",
   "scripts": {
     "watch": "rollup -c -w --environment MODE:development",
     "build": "rimraf lib | rollup -c --environment MODE:production"

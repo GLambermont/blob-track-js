@@ -9,12 +9,25 @@
 <body>
   <canvas class="js-tracking-canvas"></canvas>
 
-  <script src="../.tmp/blob-track.iife.js"></script>
+  <script src="../.tmp/motion-tracker.iife.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', e => {
-      blobTrack.utils.createWebcamStream().then(video => {
-        blobTrack.trackColor(video)(() => {})
-      });
+      motionTracker.utils.createWebcamStream()
+        .then(video => {
+          const canvas = document.querySelector('.js-tracking-canvas');
+          const ctx = canvas.getContext('2d');
+
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+
+          motionTracker.track(video, data => {
+            // console.log(Math.sqrt(data.distance));
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(video, 0, 0);
+            ctx.fillStyle = 'red';
+            ctx.fillRect(data.x, data.y, 10, 10);
+          });
+        });
     });
   </script>
 </body>
