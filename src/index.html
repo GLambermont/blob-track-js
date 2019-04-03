@@ -12,21 +12,30 @@
   <script src="../.tmp/motion-tracker.iife.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', e => {
+      const tracker = new motionTracker.Tracker();
+      const canvas = document.querySelector('.js-tracking-canvas');
+      const ctx = canvas.getContext('2d');
+
+      const draw = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(tracker.video, 0, 0);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(tracker.data.x, tracker.data.y, 10, 10);
+
+        requestAnimationFrame(draw);
+      };
+
       motionTracker.utils.createWebcamStream()
         .then(video => {
-          const canvas = document.querySelector('.js-tracking-canvas');
-          const ctx = canvas.getContext('2d');
-
           canvas.width = video.videoWidth;
           canvas.height = video.videoHeight;
 
-          motionTracker.track(video, data => {
-            // console.log(data);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(video, 0, 0);
-            ctx.fillStyle = 'red';
-            ctx.fillRect(data.x, data.y, 10, 10);
+          tracker.video = video
+          tracker.track(data => {
+
           });
+
+          draw();
         });
     });
   </script>

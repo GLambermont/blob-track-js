@@ -15,6 +15,5 @@ const distanceSquared = (v1, v2) => {
 
 // console.log(imageDataToPixelData([12, 5641, 564, 546, 546, 22,55, 32]))
 export {
-  imageDataToPixelData,
   distanceSquared
 }
